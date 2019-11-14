@@ -3,7 +3,7 @@
     width: 100%;
     background: #fff;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 #item-selection{
@@ -13,6 +13,10 @@
     justify-content: space-around;
     align-content: center;
     align-items: center;
+}
+
+.active{
+    box-shadow: black 2px 2px 2px;
 }
 
 /* #rect-selection{

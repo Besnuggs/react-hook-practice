@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../styles/header.css'
 import ReactDependentScript from 'react-dependent-script'
 import PlacesAutocomplete,{
@@ -13,6 +13,13 @@ import Konva from 'konva';
 
 function Header(props){
     const [values, setValues] = useState({location: ''})
+    const [item, setItem] = useState({type: ''})
+
+    useEffect(() => {
+      if(item.type){
+        console.log('need to update parent for clicking on stage')
+      }
+    }, [item])
 
     function handleOnChange(e){
         // console.log(e)
@@ -30,11 +37,9 @@ function Header(props){
           .catch(error => console.error('Error', error));
       };
 
-    //   const itemSelection = () => {
-    //     return(
-          
-    //     )
-    // }
+    const handleActiveItem = (type) => {
+      setItem({type})
+    }
 
     
     return(
@@ -43,7 +48,10 @@ function Header(props){
       >
         <div id="header">
            <div id="item-selection">
-             <div id="rect-selection">
+             <div 
+             id="rect-selection"
+             className={item.type === 'Rect' ? 'active' : null}
+             >
             <Stage
             width={50}
             height={50}
@@ -53,24 +61,26 @@ function Header(props){
                     height={50}
                     width={50}
                     fill={'red'}
-                    onClick={() => console.log("I've been clicked! - Red Square")}
+                    onClick={() => handleActiveItem('Rect')}
                     />
               </Layer>
             </Stage>
               </div>
-              <div id="circle-selection">
+              <div 
+              id="circle-selection"
+              className={item.type === 'Circle' ? 'active' : null}
+              >
                   <Stage
                   width={50}
                   height={50}
                   >
                   <Layer>
                     <Circle
-                      height={50}
-                      width={50}
-                      x={0}
-                      y={0}
+                      radius={25}
+                      x={25}
+                      y={25}
                       fill={'blue'}
-                      onClick={() => console.log("I've been clicked! - Blue circle")}
+                      onClick={() => handleActiveItem('Circle')}
                     />
                     </Layer>
                   </Stage>
@@ -82,7 +92,6 @@ function Header(props){
             onChange={(e) => handleOnChange(e)}
             onSelect={handleSelect}
             name="location"
-            
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>

@@ -8,18 +8,25 @@ const [search, setSearch] = useState({center: {
   lng: -80.461820
   }})
 
+const [item, setItem] = useState({type: ''})
+
 function handleSearchResult(geoData){
   setSearch({center: geoData})
+}
+
+function handlingItemChange(type){
+  setItem({type})
 }
 
   return (
     <>
     <Header 
-    handleSearchResult={handleSearchResult}
+      handleSearchResult={handleSearchResult}
     />
       
     <Main 
-    center={search.center}
+      center={search.center}
+      item={item.type}
     />
     </>
   );

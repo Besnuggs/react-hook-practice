@@ -16,7 +16,7 @@ function Main(props) {
     const [shapes, setShapes] = useState({shapes: []})
 
     useEffect(() => {
-    //*    Get Map Details - Needs to load latitude/longitude of where stage was created *//
+    //*    Get Map Details - Needs to load latitude/longitude of where stage was created  *//
     // Will need to know the width/height of Stage as well as the zoom in which it was created.
     // The scaling of the Stage, as well as child components, would need to scale when the user scales in/out
     // Needs to create item layer - loading all previously created items.
@@ -28,6 +28,9 @@ function Main(props) {
 
     }
 
+    function handleStageClick(){
+
+    }
     
     const TheStage = () => {
         return(
@@ -35,6 +38,7 @@ function Main(props) {
             width={100}
             height={100}
             id={'theStage'}
+            onClick={handleStageClick}
             >
                 <Layer>
                     <Rect
