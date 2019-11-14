@@ -16,6 +16,9 @@ function Main(props) {
     const [shapes, setShapes] = useState({shapes: []})
 
     useEffect(() => {
+    if(props.type){
+        console.log(props.type, 'Main Stage update')
+    }
     //*    Get Map Details - Needs to load latitude/longitude of where stage was created  *//
     // Will need to know the width/height of Stage as well as the zoom in which it was created.
     // The scaling of the Stage, as well as child components, would need to scale when the user scales in/out
@@ -28,8 +31,9 @@ function Main(props) {
 
     }
 
-    function handleStageClick(){
-
+    function handleStageClick(e){
+        // Will need to know which stage (id) and the x,y coordinates of click on Stage to place shape.
+        console.log(e.evt.layerX, e.evt.layerY, e.currentTarget.id)
     }
     
     const TheStage = () => {
@@ -39,6 +43,7 @@ function Main(props) {
             height={100}
             id={'theStage'}
             onClick={handleStageClick}
+            key={1}
             >
                 <Layer>
                     <Rect
@@ -52,7 +57,7 @@ function Main(props) {
         )
     }
 
-    console.log(values.center, values.zoom)
+    console.log(props)
     return(
         <div className="main">
 

@@ -18,6 +18,7 @@ function Header(props){
     useEffect(() => {
       if(item.type){
         console.log('need to update parent for clicking on stage')
+        props.handlingItemChange(item.type)
       }
     }, [item])
 

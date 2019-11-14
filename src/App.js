@@ -22,6 +22,7 @@ function handlingItemChange(type){
     <>
     <Header 
       handleSearchResult={handleSearchResult}
+      handlingItemChange={handlingItemChange}
     />
       
     <Main 
