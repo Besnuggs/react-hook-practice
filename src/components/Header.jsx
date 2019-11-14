@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/header.css'
+import ReactDependentScript from 'react-dependent-script'
 import PlacesAutocomplete,{
     geocodeByAddress,
     geocodeByPlaceId,
@@ -37,6 +38,9 @@ function Header(props){
 
     
     return(
+      <ReactDependentScript
+      scripts={[`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`]}
+      >
         <div id="header">
            <PlacesAutocomplete
             value={values.location}
@@ -78,8 +82,9 @@ function Header(props){
           </div>
         )}
       </PlacesAutocomplete>
-
+      
         </div>
+      </ReactDependentScript>
     )
 }
 
