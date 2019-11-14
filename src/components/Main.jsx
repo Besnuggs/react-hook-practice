@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {Stage, Layer, Rect} from 'react-konva';
+import {Stage, Layer, Rect, Circle, Transformer} from 'react-konva';
 import Konva from 'konva';
 import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
 import '../styles/main.css';
 
-function Main() {
+function Main(props) {
     const [values, setValues] = useState({
         center: {
             lat: 35.584340,
@@ -28,12 +28,13 @@ function Main() {
 
     }
 
+    
     const TheStage = () => {
         return(
             <Stage
             width={100}
             height={100}
-            fill={'FFF'}
+            id={'theStage'}
             >
                 <Layer>
                     <Rect
@@ -54,7 +55,8 @@ function Main() {
             <div id="map">
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: process.env.REACT_APP_MAPS_API_KEY }}
-                    defaultCenter={values.center}
+                    defaultCenter={props.center}
+                    center={props.center}
                     defaultZoom={values.zoom}
                     yesIWantToUseGoogleMapApiInternals
                 >

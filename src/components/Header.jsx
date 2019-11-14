@@ -6,6 +6,8 @@ import PlacesAutocomplete,{
     geocodeByPlaceId,
     getLatLng,
   } from 'react-places-autocomplete';
+import {Stage, Layer, Rect, Circle} from 'react-konva'
+import Konva from 'konva';
 
 
 
@@ -18,23 +20,21 @@ function Header(props){
         setValues({...values, ['location']: e})   
     }
 
-    function handleOnKeyUp(e){
-        // console.log(e)
-        if(e.keyCode === 13){
-            fetchLongAndLatitude(values.location)
-        }
-    }
-
-    function fetchLongAndLatitude(location){
-        console.log(location)
-    }
-
     const handleSelect = address => {
         geocodeByAddress(address)
           .then(results => getLatLng(results[0]))
-          .then(latLng => console.log('Success', latLng))
+          .then(latLng => {
+            console.log('Success', latLng)
+            props.handleSearchResult(latLng)
+          })
           .catch(error => console.error('Error', error));
       };
+
+    //   const itemSelection = () => {
+    //     return(
+          
+    //     )
+    // }
 
     
     return(
@@ -42,6 +42,41 @@ function Header(props){
       scripts={[`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`]}
       >
         <div id="header">
+           <div id="item-selection">
+             <div id="rect-selection">
+            <Stage
+            width={50}
+            height={50}
+            >
+              <Layer>
+                    <Rect
+                    height={50}
+                    width={50}
+                    fill={'red'}
+                    onClick={() => console.log("I've been clicked! - Red Square")}
+                    />
+              </Layer>
+            </Stage>
+              </div>
+              <div id="circle-selection">
+                  <Stage
+                  width={50}
+                  height={50}
+                  >
+                  <Layer>
+                    <Circle
+                      height={50}
+                      width={50}
+                      x={0}
+                      y={0}
+                      fill={'blue'}
+                      onClick={() => console.log("I've been clicked! - Blue circle")}
+                    />
+                    </Layer>
+                  </Stage>
+              </div>
+           </div>
+
            <PlacesAutocomplete
             value={values.location}
             onChange={(e) => handleOnChange(e)}

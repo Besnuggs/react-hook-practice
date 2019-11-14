@@ -6,3 +6,19 @@
     justify-content: center;
 }
 
+#item-selection{
+    width: 300px;
+    background-color: lightgrey;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+}
+
+/* #rect-selection{
+
+}
+
+#circle-selection{
+
+} */
